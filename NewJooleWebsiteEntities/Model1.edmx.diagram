@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce1e5b2741704ce18ab333b5ebdd83c5" Name="Diagram1">
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblCategory" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblProduct" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblProperty" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblSubcategory" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblTechSpecFilter" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblTypeFilter" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JooleWebsite.DALModel.tblUser" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblSubcategory_Subcategory_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblProduct_Product_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblProducts_Subcategory_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblTechSpecFilter_Property_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblTypeFilter_Property_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblTechSpecFilter_Subcategory_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="JooleWebsite.DALModel.FK_tblTypeFilter_Subcategory_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

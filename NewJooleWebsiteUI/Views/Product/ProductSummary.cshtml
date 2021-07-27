@@ -1,0 +1,153 @@
+﻿@model JooleWebsite.Models.ProductVM
+
+@{
+    ViewBag.Title = "ProductSummary";
+}
+
+<style>
+    a.my-class {
+        color: #ff0000
+    }
+
+        a.my-class:active {
+            color: #0e86f8
+        }
+
+        a.my-class:link {
+            color: black
+        }
+
+        a.my-class:hover {
+            color: black
+        }
+
+        a.my-class:visited {
+            color: black
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container-fluid" style="background-color:white">
+    <div class="row" id="header" style="background:linear-gradient(blue,white)">
+        <div class="row" style="width:99vw;height:70px;text-align:center;margin-top:20px;">
+            <img width="150" src="~/Images/Joole.png" style="float:left" />
+            <div style="display:inline;width:400px;margin-left:20px">
+                <form style="color:black;font:bold;">
+                    <b>Search for products:</b>
+                    <input type="text" name="searchString" />
+                    <input class="btn btn-primary" type="submit" value="Search!" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" style="background-color:ghostwhite;padding-bottom:10px;padding-top:10px;">
+            <form>
+                <div style="padding-bottom: 5px; padding-top:5px; text-align: center;border:1px solid grey">Search: <input type="submit" style="margin-left:20px" class="btn-primary" value="Save"> <button style="margin-left:10px;" class="btn-primary" id="clear">Clear</button></div>
+                <div style="padding-top: 1px; padding-bottom: 1px; text-align: center;border:1px solid grey">Product | Project</div>
+                <div style="padding-top: 1px; padding-bottom: 1px; border:1px solid grey">
+                    Product Type
+                    <br />
+
+                </div>
+                <div style="padding-top: 1px; padding-bottom: 1px;text-align: center;border:1px solid grey">
+                    Model Year:
+                    <input type="text" name="beginningYear" style="margin-left:10px" maxlength="4" size="4"> - <input type="text" style="margin-left:10px" name="endingYear" maxlength="4" size="4">
+                </div>
+                <div style="padding-top: 1px; padding-bottom: 1px;border:1px solid grey">Technical Specifications</div>
+                <div style="padding-top: 1px;border:1px solid grey"></div>
+                <p>
+                    <label for="airflow-amount">Airflow (CFM) </label><br />
+                    <input type="text" id="airflow-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div class="demo">
+                    <div id="airflow-slider"></div>
+                </div>
+                <p>
+                    <label for="power-amount">Max Power (W) </label><br />
+                    <input type="text" id="power-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div class="demo">
+                    <div id="power-slider"></div>
+                </div>
+                <p>
+                    <label for="sound-amount">Sound at max speed (dBA)</label><br />
+                    <input type="text" id="sound-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div class="demo">
+                    <div id="sound-slider"></div>
+                </div>
+                <p>
+                    <label for="sweep-amount">Fan sweep diameter (in) </label><br />
+                    <input type="text" id="sweep-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div class="demo">
+                    <div id="sweep-slider"></div>
+                </div>
+            </form>
+            @section scripts{
+                <script>
+                    $(function () {
+                        $("#airflow-slider").slider({
+                            range: true,
+                            min: 10,
+                            max: 90,
+                            values: [10, 90],
+                            slide: function (event, ui) {
+                                $("#airflow-amount").val(ui.values[0] + " - " + ui.values[1]);
+                            }
+                        });
+                        $("#airflow-amount").val($("#airflow-slider").slider("values", 0) +
+                            " - " + $("#airflow-slider").slider("values", 1));
+                    });
+                    $(function () {
+                        $("#power-slider").slider({
+                            range: true,
+                            min: 10,
+                            max: 65,
+                            values: [10, 65],
+                            slide: function (event, ui) {
+                                $("#power-amount").val(ui.values[0] + " - " + ui.values[1]);
+                            }
+                        });
+                        $("#power-amount").val($("#power-slider").slider("values", 0) +
+                            " - " + $("#power-slider").slider("values", 1))
+                    });
+                    $(function () {
+                        $("#sound-slider").slider({
+                            range: true,
+                            min: 20,
+                            max: 35,
+                            values: [20, 35],
+                            slide: function (event, ui) {
+                                $("#sound-amount").val(ui.values[0] + " - " + ui.values[1]);
+                            }
+                        });
+                        $("#sound-amount").val($("#sound-slider").slider("values", 0) +
+                            " - " + $("#sound-slider").slider("values", 1));
+                    });
+                    $(function () {
+                        $("#sweep-slider").slider({
+                            range: true,
+                            min: 18,
+                            max: 60,
+                            values: [18, 60],
+                            slide: function (event, ui) {
+                                $("#sweep-amount").val(ui.values[0] + " - " + ui.values[1]);
+                            }
+                        });
+                        $("#sweep-amount").val($("#sweep-slider").slider("values", 0) +
+                            " - " + $("#sweep-slider").slider("values", 1));
+                    });
+                </script>
+            }
+        </div>
+        <div class="col-md-9">
+
+        </div>
+    </div>
+</div>
+
+
