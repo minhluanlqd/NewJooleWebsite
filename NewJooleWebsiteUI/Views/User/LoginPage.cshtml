@@ -4,7 +4,7 @@
     ViewBag.Title = "Login";
 }
 
-<img style="margin-top:10%;width:30%" src="~/Images/Joole.png" />
+<img style="margin: 20px;width:30%" src="~/Images/Joole.png" />
 <h3>Building Product Selection Platform</h3>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval");
@@ -14,21 +14,21 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" style="width:500px;display:inline-block;">
+    <div class="form-horizontal" style="width: 100%; display:inline-block;">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div style="text-align:center">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username or email" } })
+        <div class="form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="form-input-container">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-input", placeholder = "Username or email" } })
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            <div style="text-align:center">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+        <div class="form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="form-input-container">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-input", placeholder = "Password"} })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div style="color: black;">
             @Html.DisplayFor(model => model.LoginErrorMessage)
         </div>
         <div class="form-group">

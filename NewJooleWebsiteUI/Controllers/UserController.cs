@@ -38,7 +38,7 @@ namespace NewJooleWebsiteUI.Controllers
                 }
                 else
                 {
-                    temp.LoginErrorMessage = "Incrrect username or password.";
+                    temp.LoginErrorMessage = "Incorrect username or password.";
                     Console.WriteLine("Reach here Error");
                     return View("LoginPage", temp);
                 }
