@@ -14,6 +14,12 @@ namespace NewJooleWebsiteUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "LoginPage",
+                url: "User/LoginPage",
+                defaults: new { controller = "User", action = "LoginPage", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

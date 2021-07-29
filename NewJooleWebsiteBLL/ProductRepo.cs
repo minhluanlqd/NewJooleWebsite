@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
 using NewJooleWebsiteRepo;
 using NewJooleWebsiteEntities;
-
+using System.Data.Entity;
 
 namespace NewJooleWebsiteBLL
 {
@@ -13,17 +12,19 @@ namespace NewJooleWebsiteBLL
     {
 
     }
-    public class ProductBLL
+    public class ProductRepo : ProductInterface
     {
         private DbContext context;
-        public ProductBLL(DbContext context)
+
+        public ProductRepo(DbContext context)
         {
             this.context = context;
         }
+
         private IDbSet<tblProduct> dbSet => context.Set<tblProduct>();
         public IQueryable<tblProduct> Entities => dbSet;
 
-        public tblProduct Find(int v)
+        public tblProduct Find(string v)
         {
             var a = dbSet.Find(v);
             return a;
@@ -46,6 +47,7 @@ namespace NewJooleWebsiteBLL
             //             select product;
             return s;
         }
+
         public IQueryable<tblProduct> DataSet(string filter)
         {
             if (!String.IsNullOrEmpty(filter))

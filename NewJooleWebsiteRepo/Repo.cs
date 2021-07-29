@@ -11,7 +11,7 @@ namespace NewJooleWebsiteRepo
         IEnumerable<T> find(T v);
         void remove(T entity);
         IQueryable<T> Entities { get; }
-        T Find(int v);
+        T Find(string v);
         string Search(string s);
         IQueryable<T> DataSet(string s);
     }

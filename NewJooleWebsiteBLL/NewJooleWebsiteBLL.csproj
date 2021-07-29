@@ -77,9 +77,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductBLL.cs" />
+    <Compile Include="ProductRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchInterface.cs" />
+    <Compile Include="SearchRepo.cs" />
+    <Compile Include="UnitofWork.cs" />
+    <Compile Include="UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -98,14 +100,6 @@
     <ProjectReference Include="..\NewJooleWebsiteRepo\NewJooleWebsiteRepo.csproj">
       <Project>{b35a9d58-723d-4994-90be-6acb39f98b41}</Project>
       <Name>NewJooleWebsiteRepo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NewJooleWebsiteService\NewJooleWebsiteService.csproj">
-      <Project>{db57db05-9058-4317-a838-0762b00d87b0}</Project>
-      <Name>NewJooleWebsiteService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NewJooleWebsiteUI\NewJooleWebsiteUI.csproj">
-      <Project>{41ce0a6f-624a-4ba0-b064-63329be00ceb}</Project>
-      <Name>NewJooleWebsiteUI</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

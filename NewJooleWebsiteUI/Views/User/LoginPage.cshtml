@@ -1,0 +1,41 @@
+﻿@model NewJooleWebsiteUI.Models.User
+@Styles.Render("~/CSS/Main.css");
+@{
+    ViewBag.Title = "Login";
+}
+
+<img style="margin-top:10%;width:30%" src="~/Images/Joole.png" />
+<h3>Building Product Selection Platform</h3>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+}
+
+@using (Html.BeginForm("LoginPage", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="width:500px;display:inline-block;">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div style="text-align:center">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username or email" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="text-align:center">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @Html.DisplayFor(model => model.LoginErrorMessage)
+        </div>
+        <div class="form-group">
+            <div style="align-content:center;text-align:center">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+

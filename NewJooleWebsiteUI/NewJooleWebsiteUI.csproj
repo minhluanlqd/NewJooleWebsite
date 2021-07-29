@@ -129,11 +129,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +175,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Product\ProductSummary.cshtml" />
+    <Content Include="Views\User\LoginPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -195,6 +198,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewJooleWebsiteEntities\NewJooleWebsiteEntities.csproj">
+      <Project>{c6006b55-8bfd-4578-9f01-ec3c8f70968c}</Project>
+      <Name>NewJooleWebsiteEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewJooleWebsiteService\NewJooleWebsiteService.csproj">
       <Project>{db57db05-9058-4317-a838-0762b00d87b0}</Project>
       <Name>NewJooleWebsiteService</Name>
