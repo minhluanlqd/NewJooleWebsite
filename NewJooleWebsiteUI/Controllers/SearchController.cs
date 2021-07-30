@@ -13,7 +13,7 @@ namespace NewJooleWebsiteUI.Controllers
     {
         // GET: Search
         [HttpGet]
-        public ActionResult Index(string value)
+        public ActionResult Search(string value)
         {
             List<Category> listObj = new List<Category>();
             foreach (var tempCatego in new Service().getCategories())
@@ -25,7 +25,7 @@ namespace NewJooleWebsiteUI.Controllers
                 listObj.Add(tempObj);
             }
 
-            ViewBag.Category = new SelectList(listObj, "Category_ID", "Category_Name");
+            ViewBag.Category = new SelectList(listObj, "CategoryID", "CategoryName");
 
 
             if (value != null)
@@ -45,15 +45,15 @@ namespace NewJooleWebsiteUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string term, string Category)
+        public ActionResult Search(string term, string Category)
         {
             if (string.IsNullOrEmpty(term))
             {
-                return RedirectToAction("Summary", "Product", new { searchString = term });
+                return RedirectToAction("ProductSummary", "Product", new { searchString = term });
             }
             else
             {
-                return RedirectToAction("Summary", "Product", new { searchString = term });
+                return RedirectToAction("ProductSummary", "Product", new { searchString = term });
             }
         }
 

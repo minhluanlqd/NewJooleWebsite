@@ -34,7 +34,7 @@ namespace NewJooleWebsiteUI.Controllers
                     Session["userID"] = service.getSessionID(temp.UserName, temp.Password);
                     //return RedirectToAction("Summary", "Product");
                     Console.WriteLine("Reach here Success");
-                    return RedirectToAction("ProductSummary", "Product");
+                    return RedirectToAction("Search", "Search");
                 }
                 else
                 {

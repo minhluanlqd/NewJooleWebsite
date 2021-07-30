@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace JooleWebsite.Models
+namespace NewJooleWebsiteUI.Models
 {
     public class ProductVM
     {
         public string productID { get; set; }
-        public int subCategoryID { get; set; }
+        public string subCategoryID { get; set; }
         public string productName { get; set; }
         public string productImage { get; set; }
         public string series { get; set; }
@@ -17,7 +17,7 @@ namespace JooleWebsite.Models
         public string seriesInfo { get; set; }
         public string features { get; set; }
 
-        public ProductVM(string pid, int scid, string pn, string pi, string s, string m, int y, string si, string f)
+        public ProductVM(string pid, string scid, string pn, string pi, string s, string m, int y, string si, string f)
         {
             productID = pid;
             subCategoryID = scid;

@@ -34,6 +34,6 @@ namespace JooleWebsite.Controllers
             var obj = JsonConvert.SerializeObject(valueList);
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
+
     }
 }
