@@ -1,0 +1,44 @@
+﻿@model NewJooleWebsiteUI.Models.Login
+
+@{
+    ViewBag.Title = "Log In";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <p>
+        <button type="button" class="signup_btn">
+
+            @Html.ActionLink("Sign Up", "newUser")
+        </button>
+    </p>
+    <img src="~/Images/Joole.png" alt="joole logo">
+    <h2>Building Product Selection Platform</h2>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+<div>
+
+
+    <!-- <i class="mdi mdi-account"></i>  -->
+    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username or email" } })
+    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+    <br>
+    <!-- <i class="mdi mdi-lock"></i>  -->
+    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+    @Html.DisplayFor(model => model.LoginErrorMessage)
+    <br />
+    <input type="submit" value="Submit" />
+</div>
+    }
+</body>
+
+</html>

@@ -90,6 +90,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewJooleWebsiteBLL\NewJooleWebsiteBLL.csproj">
+      <Project>{e6efd368-a725-4fe5-bbbc-34729e231b14}</Project>
+      <Name>NewJooleWebsiteBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewJooleWebsiteEntities\NewJooleWebsiteEntities.csproj">
+      <Project>{c6006b55-8bfd-4578-9f01-ec3c8f70968c}</Project>
+      <Name>NewJooleWebsiteEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewJooleWebsiteRepo\NewJooleWebsiteRepo.csproj">
       <Project>{b35a9d58-723d-4994-90be-6acb39f98b41}</Project>
       <Name>NewJooleWebsiteRepo</Name>
