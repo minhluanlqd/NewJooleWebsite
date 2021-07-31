@@ -14,8 +14,11 @@ namespace NewJooleWebsiteUI.Controllers
         [HttpGet]
         public ActionResult LoginPage()
         {
-            User temp = new User();
-            return View(temp);
+            if (Session["username"] != null && Session["password"] != null)
+            {
+                return RedirectToAction("Search", "Search");
+            }
+            return View();
         }
 
         /*
@@ -31,7 +34,8 @@ namespace NewJooleWebsiteUI.Controllers
                 Console.WriteLine("Reach here");
                 if (service.Authentication(temp.UserName, temp.Password))
                 {
-                    Session["userID"] = service.getSessionID(temp.UserName, temp.Password);
+                    Session["username"] = temp.UserName;
+                    Session["password"] = temp.Password;
                     //return RedirectToAction("Summary", "Product");
                     Console.WriteLine("Reach here Success");
                     return RedirectToAction("Search", "Search");
@@ -44,6 +48,12 @@ namespace NewJooleWebsiteUI.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("LoginPage");
         }
     }
 }
