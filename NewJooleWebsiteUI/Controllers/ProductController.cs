@@ -12,6 +12,7 @@ namespace JooleWebsite.Controllers
 {
     public class ProductController : Controller
     {
+
         public ActionResult ProductSummary(string subcategoryID)
         {
             List<tblProduct> productList = new Service().GetProducts();
@@ -24,6 +25,6 @@ namespace JooleWebsite.Controllers
                 }
             return View(result);
         }
-
+        
     }
 }

@@ -1,7 +1,8 @@
-﻿@model IEnumerable<NewJooleWebsiteUI.Models.ProductVM>
+﻿@model IEnumerable<NewJooleWebsiteUI.Models.Products>
 @{
     ViewBag.Title = "ProductSummary";
 }
+
 
 <style>
     a.my-class {
@@ -28,9 +29,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<div class="container-fluid" style="background-color:white">
-    <div class="row" id="header" style="background:linear-gradient(blue,white)">
-        <div class="row" style="width:99vw;height:70px;text-align:center;margin-top:20px;">
+<div class="container-fluid" style="background-color:white; height: 100vh;">
+    <div class="row" id="header" style="background: linear-gradient(#16419e,white)">
+        <div class="row" style="width:99vw;height:70px;text-align:center;">
             <img width="150" src="~/Images/Joole.png" style="float:left" />
             <div style="display:inline;width:400px;margin-left:20px">
                 <form style="color:black;font:bold;">
@@ -147,19 +148,19 @@
             <form style=" padding:5px">
                 @foreach (var product in Model)
                 {
-                    <div id="@Html.DisplayFor(modelItem => product.productID)" style="float:left;margin-left:10px;margin-top:10px;border: 3px solid gray; text-align: center; display: inline-block; width: 200px; height: 400px;" onclick="myFunction(this)">
-                        <img src="/Images/fan'@product.productID'.jpg" style="width:80px;height:60px">
+                    <div id="@Html.DisplayFor(modelItem => product.Product_ID)" style="float:left;margin-left:10px;margin-top:10px;border: 3px solid gray; text-align: center; display: inline-block; width: 200px; height: 400px;" onclick="myFunction(this)">
+                        <img src="@product.Product_Image" style="width:80px;height:60px">
                         <br />
-                        <b> @Html.ActionLink("" + @Html.DisplayFor(modelItem => product.productName) + "", "Summa", "Home", new { id = @Html.DisplayFor(modelItem => product.productID) }, new { @class = "my-class" })</b>
+                        <b> @Html.ActionLink("" + @Html.DisplayFor(modelItem => product.Product_Name) + "", "Summa", "Home", new { id = @Html.DisplayFor(modelItem => product.Product_ID) }, new { @class = "my-class" })</b>
                         <br />
-                        <b>@Html.DisplayFor(modelItem => product.series)</b><br />
-                        <b>@Html.DisplayFor(modelItem => product.model)</b><br />
+                        <b>@Html.DisplayFor(modelItem => product.Series)</b><br />
+                        <b>@Html.DisplayFor(modelItem => product.SeriesInfo)</b><br />
                         @*@foreach (var c in product.characteristics)
-                    {
-                        @Html.DisplayFor(modelItem => c)<br />
-                    }
-                    @Html.DisplayFor(modelItem => product.characteristics)<br />*@
-                        <input type="checkbox" name="compare" value=@Html.DisplayFor(modelItem => product.productID) /> <b>Compare</b>
+                {
+                    @Html.DisplayFor(modelItem => c)<br />
+                }
+                @Html.DisplayFor(modelItem => product.characteristics)<br />*@
+                        <input type="checkbox" name="compare" value=@Html.DisplayFor(modelItem => product.Product_ID) /> <b>Compare</b>
                         <input class="btn btn-primary" type="submit" value="Add to">
                     </div>
                 }
