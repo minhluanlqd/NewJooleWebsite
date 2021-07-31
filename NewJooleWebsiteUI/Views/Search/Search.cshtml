@@ -10,21 +10,21 @@
     {
         <img style="width:30%" src="~/Images/Joole.png" />
         <h3>Building Product Selection Platform</h3>
-        @Html.DropDownListFor(m => m.CategoryName, ViewBag.CategoryName as SelectList, "Select Category", new { @class = "btn btn-secondary dropdown-toggle" })
+        @Html.DropDownListFor(m => m.CategoryID, ViewBag.CategoryName as SelectList, "Select Category", new { @class = "btn btn-secondary dropdown-toggle" })
         //@Html.ValidationMessageFor(m => m.SubcategoryName)<br />
-        @Html.DropDownListFor(m => m.SubcategoryName, new SelectList(""), "Select Subcategory", new { @class = "btn btn-secondary dropdown-toggle" })
+        @Html.DropDownListFor(m => m.SubcategoryID, new SelectList(""), "Select Subcategory", new { @class = "btn btn-secondary dropdown-toggle" })
         <input type="submit" value="Search" class="btn btn-primary" />
     }
     <script>
         $(document).ready(function () {
-            $("#CategoryName").change(function () {
+            $("#CategoryID").change(function () {
                 $.ajax({
                     type: "post",
                     url: "/Search/GetSubcategoryList?Category=" + $(this).val(),
                     contentType: "html",
                     success: function (response) {
-                        $("#SubcategoryName").empty();
-                        $("#SubcategoryName").append(response);
+                        $("#SubcategoryID").empty();
+                        $("#SubcategoryID").append(response);
                     }
                 })
             })
