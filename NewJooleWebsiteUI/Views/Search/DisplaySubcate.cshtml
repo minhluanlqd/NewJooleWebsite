@@ -1,0 +1,8 @@
+﻿@if (ViewBag.SubcategoryName != null)
+{
+    foreach (var subcate in ViewBag.SubcategoryName)
+    {
+        <option value="@subcate.Value">@subcate.Text</option>
+    }
+
+}

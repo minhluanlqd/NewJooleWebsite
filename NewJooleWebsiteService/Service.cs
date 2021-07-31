@@ -13,12 +13,13 @@ namespace NewJooleWebsiteService
     {
         static string connectionString = "Data Source=(localdb)\\ProjectsV13;Initial Catalog=JooleWebsite.DAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         static string connectionString2 = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source = (localdb)\\ProjectsV13;initial catalog = JooleWebsite.DAL; integrated security = True; connect timeout = 30; encrypt=False;trustservercertificate=False;applicationintent=ReadWrite;multisubnetfailover=False;MultipleActiveResultSets=True;App=EntityFramework\"";
-        static DbContext context = new DbContext(connectionString2);
+        static string connectionString3 = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source = (localdb)\\ProjectsV13;initial catalog = JooleWebsite.DAL; integrated security = True; MultipleActiveResultSets=True;App=EntityFramework\"";
+        static DbContext context = new DbContext(connectionString3);
         UnitofWork unitofWork = new UnitofWork(context);
 
         private string checker(string loginName)
         {
-            if(loginName.Contains("@"))
+            if (loginName.Contains("@"))
             {
                 return "email";
             }
@@ -30,7 +31,7 @@ namespace NewJooleWebsiteService
         private List<tblUser> filteredList(string username, string password)
         {
             tblUser temp = new tblUser();
-            if(checker(username) == "email")
+            if (checker(username) == "email")
             {
                 temp.User_Email = username;
             }
@@ -47,9 +48,9 @@ namespace NewJooleWebsiteService
             List<tblUser> list = filteredList(username, password);
             if (list.Count > 0)
             {
-                if(checker(username) == "email")
+                if (checker(username) == "email")
                 {
-                    if(list.First().User_Email == username && list.First().Password == password)
+                    if (list.First().User_Email == username && list.First().Password == password)
                     {
                         return true;
                     }
@@ -84,7 +85,7 @@ namespace NewJooleWebsiteService
         public string Value()
         {
             var a = unitofWork.users.Find("UserX01");
-            if(a.User_id != "")
+            if (a.User_id != "")
             {
                 return a.User_Name;
             }
@@ -119,7 +120,7 @@ namespace NewJooleWebsiteService
             string result = unitofWork.products.Search(s);
             return result;
         }
-        public IQueryable<tblProduct>GetDataSet(string filter)
+        public IQueryable<tblProduct> GetDataSet(string filter)
         {
             return unitofWork.products.DataSet(filter);
         }
@@ -129,14 +130,19 @@ namespace NewJooleWebsiteService
             return a;
         }
 
-        public List<tblCategory> getCategories()
+        public List<tblCategory> GetCategories()
         {
             return unitofWork.categorySearch.GetListCategory().ToList();
         }
 
-        public List<tblSubcategory> GetSubCategories(string categoryID)
+        public List<tblSubcategory> GetSubcategories(string categoryID)
         {
-            return unitofWork.subCategorySearch.getSubCategoBasedOnCatego(categoryID).ToList();
+            return unitofWork.subcategorySearch.GetSubcategoBasedOnCatego(categoryID).ToList();
+        }
+
+        public List<tblProduct> GetProducts()
+        {
+            return unitofWork.products.GetListProduct().ToList();
         }
     }
 }

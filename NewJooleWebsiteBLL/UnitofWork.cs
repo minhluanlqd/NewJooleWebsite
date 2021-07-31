@@ -8,7 +8,7 @@ namespace NewJooleWebsiteBLL
 {
     interface UnitofWorkInterace
     {
-        ProductInterface products { get;}
+        ProductInterface products { get; }
         UserInterface users { get; }
 
     }
@@ -21,8 +21,8 @@ namespace NewJooleWebsiteBLL
             this.context = context;
         }
         public UserInterface users => new UserRepo(context);
-        public SearchTblCategoryInterface categorySearch => new SearchRepo(context);
-        public SearchTblSubCategoryInterface subCategorySearch => new SearchRepo(context);
+        public SearchtblCategoryInterface categorySearch => new SearchRepo(context);
+        public SearchtblSubcategoryInterface subcategorySearch => new SearchRepo(context);
         public ProductInterface products => new ProductRepo(context);
     }
 }
