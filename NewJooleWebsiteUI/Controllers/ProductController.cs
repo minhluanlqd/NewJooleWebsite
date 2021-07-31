@@ -11,7 +11,7 @@ namespace JooleWebsite.Controllers
 {
     public class ProductController : Controller
     {
-        public JsonResult Summary()
+        public ActionResult ProductSummary()
         {
             Service service = new Service();
             List<Products> valueList = new List<Products>();
@@ -31,12 +31,9 @@ namespace JooleWebsite.Controllers
 
                 valueList.Add(value);
             }
-            var obj = JsonConvert.SerializeObject(valueList);
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            
+            return View(valueList);
         }
-        public ActionResult ProductSummary()
-        {
-            return View("ProductSummary");
-        }
+        
     }
 }

@@ -36,7 +36,7 @@ namespace NewJooleWebsiteUI.Controllers
             foreach (var product in productList)
                 if (product.Subcategory_ID == subcateID)
                     result.Add(product);
-            return RedirectToAction("ProductSummary", "Product", new { subcategoryID = subcateID, products = productList });
+            return RedirectToAction("ProductSummary", "Product", new { subcategoryID = subcateID});
         }
 
         public ActionResult GetSubcategoryList(string category)
