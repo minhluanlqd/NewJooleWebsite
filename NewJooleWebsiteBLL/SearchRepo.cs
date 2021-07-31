@@ -8,16 +8,17 @@ using NewJooleWebsiteRepo;
 
 namespace NewJooleWebsiteBLL
 {
-    public interface SearchTblCategoryInterface : Repo<tblCategory>
+    public interface SearchtblCategoryInterface : Repo<tblCategory>
     {
         IEnumerable<tblCategory> GetListCategory();
     }
 
-    public interface SearchTblSubCategoryInterface : Repo<tblSubcategory>
+    public interface SearchtblSubcategoryInterface : Repo<tblSubcategory>
     {
-        IEnumerable<tblSubcategory> getSubCategoBasedOnCatego(string categoryID);
+        IEnumerable<tblSubcategory> GetSubcategoBasedOnCatego(string categoryID);
     }
-    public class SearchRepo : SearchTblCategoryInterface, SearchTblSubCategoryInterface
+
+    public class SearchRepo : SearchtblCategoryInterface, SearchtblSubcategoryInterface
     {
         DbContext Context;
 
@@ -32,7 +33,7 @@ namespace NewJooleWebsiteBLL
 
 
         private List<tblCategory> CategoriesList => Context.Set<tblCategory>().ToList();
-        private List<tblSubcategory> subCategoriesList => Context.Set<tblSubcategory>().ToList();
+        private List<tblSubcategory> SubcategoriesList => Context.Set<tblSubcategory>().ToList();
 
         IQueryable<tblCategory> Repo<tblCategory>.Entities => throw new NotImplementedException();
 
@@ -42,20 +43,20 @@ namespace NewJooleWebsiteBLL
             return CategoriesList;
         }
 
-        public IEnumerable<tblSubcategory> getSubCategoBasedOnCatego(string categoryID)
+        public IEnumerable<tblSubcategory> GetSubcategoBasedOnCatego(string categoryID)
         {
-            return subCategoriesList.Where(p => p.Category_ID == categoryID);
+            return SubcategoriesList.Where(p => p.Category_ID == categoryID);
         }
 
         public IEnumerable<tblCategory> find(tblCategory v)
         {
-            var filteredList = CategoriesList.Where(current => current.Subcategory_Name == v.Subcategory_Name); // This is category name 
+            var filteredList = CategoriesList.Where(current => current.Subcategory_Name == v.Subcategory_Name);
             return filteredList;
         }
 
         public IEnumerable<tblSubcategory> find(tblSubcategory v)
         {
-            var filteredList = subCategoriesList.Where(current => current.Subcategory_Name == v.Subcategory_Name);
+            var filteredList = SubcategoriesList.Where(current => current.Subcategory_Name == v.Subcategory_Name);
             return filteredList;
         }
 

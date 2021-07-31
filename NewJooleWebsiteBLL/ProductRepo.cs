@@ -10,7 +10,7 @@ namespace NewJooleWebsiteBLL
 {
     public interface ProductInterface : Repo<tblProduct>
     {
-
+        IEnumerable<tblProduct> GetListProduct();
     }
     public class ProductRepo : ProductInterface
     {
@@ -22,12 +22,19 @@ namespace NewJooleWebsiteBLL
         }
 
         private IDbSet<tblProduct> dbSet => context.Set<tblProduct>();
+        private List<tblProduct> ProductList => context.Set<tblProduct>().ToList();
         public IQueryable<tblProduct> Entities => dbSet;
 
         public tblProduct Find(string v)
         {
             var a = dbSet.Find(v);
             return a;
+        }
+
+        public IEnumerable<tblProduct> GetListProduct()
+        {
+
+            return ProductList;
         }
 
         public string Search(string searchString)
