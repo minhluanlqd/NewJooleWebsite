@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NewJooleWebsiteEntities;
 using NewJooleWebsiteService;
 using NewJooleWebsiteUI.Models;
 using Newtonsoft.Json;
@@ -11,28 +12,17 @@ namespace JooleWebsite.Controllers
 {
     public class ProductController : Controller
     {
-        public JsonResult ProductSummary()
+        public ActionResult ProductSummary(string subcategoryID)
         {
-            Service service = new Service();
-            List<Products> valueList = new List<Products>();
-            for(int i = 1; i < 6; i++)
-            {
-                Products value = new Products();
-                var a = service.value(i.ToString());
-                value.Product_ID = a.Product_ID;
-                value.Subcategory_ID = a.Subcategory_ID;
-                value.Product_Name = a.Product_Name;
-                value.Model = a.Model;
-                value.Series = a.Series;
-                value.Product_Image = a.Product_Image;
-                value.Features = a.Features;
-                value.ModelYear = (int)a.Model_Year;
-                value.SeriesInfo = a.Series_Info;
-
-                valueList.Add(value);
-            }
-            var obj = JsonConvert.SerializeObject(valueList);
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            List<tblProduct> productList = new Service().GetProducts();
+            List<Products> result = new List<Products>();
+            foreach (var tempProduct in productList)
+                if (tempProduct.Subcategory_ID == subcategoryID)
+                {
+                    Products product = new Products(tempProduct.Product_ID,tempProduct.Subcategory_ID,tempProduct.Product_Name,tempProduct.Product_Image,tempProduct.Series,tempProduct.Model,tempProduct.Model_Year.Value,tempProduct.Series_Info,tempProduct.Features);
+                    result.Add(product);
+                }
+            return View(result);
         }
 
     }

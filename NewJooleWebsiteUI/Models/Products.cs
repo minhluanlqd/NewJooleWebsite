@@ -16,5 +16,18 @@ namespace NewJooleWebsiteUI.Models
         public string Model { get; set; }
         public int ModelYear { get; internal set; }
         public string SeriesInfo { get; internal set; }
+
+        public Products(string pid, string scid, string pn, string pi, string s, string m, int y, string si, string f)
+        {
+            Product_ID = pid;
+            Subcategory_ID = scid;
+            Product_Name = pn;
+            Product_Image = pi;
+            Series = s;
+            Model = m;
+            ModelYear = y;
+            SeriesInfo = si;
+            Features = f;
+        }
     }
 }

@@ -24,20 +24,9 @@ namespace NewJooleWebsiteUI.Controllers
         public ActionResult Search(CateSubcate model)
         {
             if (!ModelState.IsValid) return View();
-            Service temp = new Service();
-            string subcateID = "";
-            foreach (var cate in temp.GetCategories())
-                foreach (var subcate in temp.GetSubcategories(cate.Category_ID))
-                    if (subcate.Subcategory_Name == model.SubcategoryName)
-                        subcateID = subcate.Subcategory_ID;
-
-            List<tblProduct> productList = new Service().GetProducts();
-            List<tblProduct> result = new List<tblProduct>();
-            foreach (var product in productList)
-                if (product.Subcategory_ID == subcateID)
-                    result.Add(product);
-            return RedirectToAction("ProductSummary", "Product", new { subcategoryID = subcateID, products = productList });
+            return RedirectToAction("ProductSummary", "Product", new { subcategoryID = model.SubcategoryID });
         }
+
 
         public ActionResult GetSubcategoryList(string category)
         {
