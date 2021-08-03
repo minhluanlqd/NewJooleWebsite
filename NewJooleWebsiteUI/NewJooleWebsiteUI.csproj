@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductDetailsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +182,7 @@
     <Content Include="Views\User\LoginPage.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Search\DisplaySubcate.cshtml" />
+    <Content Include="Views\ProductDetails\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
