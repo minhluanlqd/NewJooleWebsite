@@ -4,7 +4,6 @@ namespace NewJooleWebsiteUI.Models
 {
     public class CateSubcate
     {
-        [Required]
         [Display(Name = "Select Category")]
         public string CategoryID { get; set; }
 

@@ -1,28 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NewJooleWebsiteEntities;
 using NewJooleWebsiteService;
-using NewJooleWebsiteUI.Models;
 using Newtonsoft.Json;
 
 namespace NewJooleWebsiteUI.Controllers
 {
-    public class SearchController : Controller
+    public class ProductDetailsController : Controller
     {
-        [HttpGet]
-        public ActionResult Search()
+        public ActionResult ProductDetails(string productID="1")
         {
             List<tblCategory> cateList = new Service().GetCategories();
-            ViewBag.CategoryName = new SelectList(cateList, "Category_ID", "Subcategory_Name");
-            return View();
+            Session["CategoryName"] = new SelectList(cateList, "Category_ID", "Subcategory_Name");
+
+            List<tblProduct> productList = new Service().GetProducts();
+            List<tblProduct> result = new List<tblProduct>();
+            foreach (var tempProduct in productList)
+                if (tempProduct.Product_ID == productID)
+                {
+                    result.Add(tempProduct);
+                    break;
+                }
+            return View(result);
         }
-        
+
         public ActionResult doSearch(string CategoryID, string SubcategoryName)
         {
-            //TempData["Test2"] = CategoryID + SubcategoryName;
             Service temp = new Service();
             string Subcategory = "";
 
@@ -33,7 +42,7 @@ namespace NewJooleWebsiteUI.Controllers
                     {
                         Subcategory = subcate.Subcategory_ID;
                         break;
-                    }      
+                    }
             }
             else
             {
@@ -52,7 +61,7 @@ namespace NewJooleWebsiteUI.Controllers
             }
             return RedirectToAction("ProductSummary", "Product", new { subcategoryID = Subcategory });
         }
-        
+
         public JsonResult Autocomplete(string CategoryID, string SubcategoryName)
         {
             Service temp = new Service();
@@ -71,22 +80,5 @@ namespace NewJooleWebsiteUI.Controllers
                         result.Add(subcate.Subcategory_Name);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
-
-        /*public ActionResult GetSubcategoryList(string category)
-        {
-            List<tblSubcategory> subcateList = new Service().GetSubcategories(category);
-            ViewBag.SubcategoryName = new SelectList(subcateList, "Subcategory_ID", "Subcategory_Name");
-            return PartialView("DisplaySubcate");
-        }
-
-        submit = function () {
-                var link = '@Url.Action("doSearch", "Search", new { SubcategoryName = "replace" })';
-                link = link.replace("replace", $("#SubcategoryName").val());
-                if ($("#SubcategoryName").val() != null) {
-                    window.location.href = link;
-                }
-            }
-        });
-        */
     }
 }
