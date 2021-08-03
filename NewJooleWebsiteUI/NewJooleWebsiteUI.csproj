@@ -181,6 +181,7 @@
     <Content Include="Views\User\LoginPage.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Search\DisplaySubcate.cshtml" />
+    <Content Include="Views\User\SignUpPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

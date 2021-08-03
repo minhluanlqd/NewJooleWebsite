@@ -11,8 +11,6 @@ namespace NewJooleWebsiteService
 {
     public class Service
     {
-        static string connectionString = "Data Source=(localdb)\\ProjectsV13;Initial Catalog=JooleWebsite.DAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        static string connectionString2 = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source = (localdb)\\ProjectsV13;initial catalog = JooleWebsite.DAL; integrated security = True; connect timeout = 30; encrypt=False;trustservercertificate=False;applicationintent=ReadWrite;multisubnetfailover=False;MultipleActiveResultSets=True;App=EntityFramework\"";
         static string connectionString3 = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source = (localdb)\\ProjectsV13;initial catalog = JooleWebsite.DAL; integrated security = True; MultipleActiveResultSets=True;App=EntityFramework\"";
         static DbContext context = new DbContext(connectionString3);
         UnitofWork unitofWork = new UnitofWork(context);
@@ -42,6 +40,16 @@ namespace NewJooleWebsiteService
             temp.Password = password;
             return unitofWork.users.find(temp).ToList();
         }
+
+        public void addUser(string username, string password, string EmailAddress)
+        {
+            //var user = new List<T>
+            //{
+
+            //}
+
+        }
+
         public bool Authentication(string username, string password)
         {
             Console.WriteLine(context.Database.Exists().ToString());
