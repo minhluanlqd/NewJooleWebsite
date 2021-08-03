@@ -1,6 +1,15 @@
 ﻿@model IEnumerable<NewJooleWebsiteUI.Models.Products>
 @{
     ViewBag.Title = "ProductSummary";
+    if (ViewBag.BeginningYear == 1932)
+    {
+        ViewBag.BeginningYear = "";
+    }
+    if (ViewBag.EndingYear == 2030)
+    {
+        ViewBag.EndingYear = "";
+    }
+
 }
 
 
@@ -25,26 +34,23 @@
             color: black
         }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="container-fluid" style="background-color:white; height: 100vh;">
     <div class="row" id="header" style="background: linear-gradient(#16419e,white)">
         <div class="row" style="width:99vw;height:70px;text-align:center;">
             <img width="150" src="~/Images/Joole.png" style="float:left" />
             <div style="display:inline;width:400px;margin-left:20px">
-                <form style="color:black;font:bold;">
-                    <b>Search for products:</b>
-                    <input type="text" name="searchString" />
-                    <input class="btn btn-primary" type="submit" value="Search!" />
+                <form action="doSearch">
+                    @Html.DropDownList("CategoryID", Session["CategoryName"] as SelectList, "Select Category", new { @class = "btn btn-secondary dropdown-toggle" })
+                    <input type="text" id="SubcategoryName" name="SubcategoryName" placeholder="Search..." class="btn btn-secondary dropdown-toggle" required />
+                    <input type="submit" value="Search" class="btn btn-primary" />
                 </form>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-3" style="background-color:ghostwhite;padding-bottom:10px;padding-top:10px;">
-            <form>
+            <form action="filterProductSummary">
                 <div style="padding-bottom: 5px; padding-top:5px; text-align: center;border:1px solid grey">Search: <input type="submit" style="margin-left:20px" class="btn-primary" value="Save"> <button style="margin-left:10px;" class="btn-primary" id="clear">Clear</button></div>
                 <div style="padding-top: 1px; padding-bottom: 1px; text-align: center;border:1px solid grey">Product | Project</div>
                 <div style="padding-top: 1px; padding-bottom: 1px; border:1px solid grey">
@@ -54,7 +60,7 @@
                 </div>
                 <div style="padding-top: 1px; padding-bottom: 1px;text-align: center;border:1px solid grey">
                     Model Year:
-                    <input type="text" name="beginningYear" style="margin-left:10px" maxlength="4" size="4"> - <input type="text" style="margin-left:10px" name="endingYear" maxlength="4" size="4">
+                    <input type="text" name="beginningYear" style="margin-left:10px" maxlength="4" size="4" value="@ViewBag.BeginningYear"> - <input type="text" style="margin-left:10px" name="endingYear" maxlength="4" size="4" value="@ViewBag.EndingYear">
                 </div>
                 <div style="padding-top: 1px; padding-bottom: 1px;border:1px solid grey">Technical Specifications</div>
                 <div style="padding-top: 1px;border:1px solid grey"></div>
@@ -87,85 +93,116 @@
                     <div id="sweep-slider"></div>
                 </div>
             </form>
-            @section scripts{
-                <script>
-                    $(function () {
-                        $("#airflow-slider").slider({
-                            range: true,
-                            min: 10,
-                            max: 90,
-                            values: [10, 90],
-                            slide: function (event, ui) {
-                                $("#airflow-amount").val(ui.values[0] + " - " + ui.values[1]);
-                            }
-                        });
-                        $("#airflow-amount").val($("#airflow-slider").slider("values", 0) +
-                            " - " + $("#airflow-slider").slider("values", 1));
-                    });
-                    $(function () {
-                        $("#power-slider").slider({
-                            range: true,
-                            min: 10,
-                            max: 65,
-                            values: [10, 65],
-                            slide: function (event, ui) {
-                                $("#power-amount").val(ui.values[0] + " - " + ui.values[1]);
-                            }
-                        });
-                        $("#power-amount").val($("#power-slider").slider("values", 0) +
-                            " - " + $("#power-slider").slider("values", 1))
-                    });
-                    $(function () {
-                        $("#sound-slider").slider({
-                            range: true,
-                            min: 20,
-                            max: 35,
-                            values: [20, 35],
-                            slide: function (event, ui) {
-                                $("#sound-amount").val(ui.values[0] + " - " + ui.values[1]);
-                            }
-                        });
-                        $("#sound-amount").val($("#sound-slider").slider("values", 0) +
-                            " - " + $("#sound-slider").slider("values", 1));
-                    });
-                    $(function () {
-                        $("#sweep-slider").slider({
-                            range: true,
-                            min: 18,
-                            max: 60,
-                            values: [18, 60],
-                            slide: function (event, ui) {
-                                $("#sweep-amount").val(ui.values[0] + " - " + ui.values[1]);
-                            }
-                        });
-                        $("#sweep-amount").val($("#sweep-slider").slider("values", 0) +
-                            " - " + $("#sweep-slider").slider("values", 1));
-                    });
-                </script>
-            }
         </div>
+
         <div class="col-md-9">
             <form style=" padding:5px">
                 @foreach (var product in Model)
                 {
                     <div id="@Html.DisplayFor(modelItem => product.Product_ID)" style="float:left;margin-left:10px;margin-top:10px;border: 3px solid gray; text-align: center; display: inline-block; width: 200px; height: 400px;" onclick="myFunction(this)">
-                        <img src="@product.Product_Image" style="width:80px;height:60px">
+                        <a href="~/ProductDetails/ProductDetails?productID=@Html.DisplayFor(modelItem => product.Product_ID)">
+                            <img src="@product.Product_Image" style="width:80px;height:60px">
+                        </a>
                         <br />
                         <b> @Html.ActionLink("" + @Html.DisplayFor(modelItem => product.Product_Name) + "", "Summa", "Home", new { id = @Html.DisplayFor(modelItem => product.Product_ID) }, new { @class = "my-class" })</b>
                         <br />
                         <b>@Html.DisplayFor(modelItem => product.Series)</b><br />
                         <b>@Html.DisplayFor(modelItem => product.SeriesInfo)</b><br />
                         @*@foreach (var c in product.characteristics)
-                {
-                    @Html.DisplayFor(modelItem => c)<br />
-                }
-                @Html.DisplayFor(modelItem => product.characteristics)<br />*@
+                        {
+                            @Html.DisplayFor(modelItem => c)<br />
+                        }
+                        @Html.DisplayFor(modelItem => product.characteristics)<br />*@
                         <input type="checkbox" name="compare" value=@Html.DisplayFor(modelItem => product.Product_ID) /> <b>Compare</b>
                         <input class="btn btn-primary" type="submit" value="Add to">
                     </div>
                 }
             </form>
         </div>
+
+        @section scripts{
+            <script>
+                $(document).ready(function () {
+                    $("#SubcategoryName").autocomplete({
+                        source: function (request, response) {
+                            $.ajax({
+                                data: {
+                                'CategoryID': $("#CategoryID").val(),
+                                'SubcategoryName': $("#SubcategoryName").val()
+                                },
+                                url: '@Url.Action("Autocomplete","Search")',
+                                dataType: "json",
+                                contentType: "application/json;charset=utf-8",
+                                success: function (data) {
+                                    var parsed = JSON.parse(data);
+                                    var newArray = [];
+                                    var i = 0;
+                                    $.each(parsed, function (key, val) {
+                                        newArray[i] = val;
+                                        i++;
+                                    });
+                                    response(newArray);
+                                },
+                                error: response
+                            });
+                        }
+                    })
+                });
+
+                $(function () {
+                    $("#airflow-slider").slider({
+                        range: true,
+                        min: 10,
+                        max: 90,
+                        values: [10, 90],
+                        slide: function (event, ui) {
+                            $("#airflow-amount").val(ui.values[0] + " - " + ui.values[1]);
+                        }
+                    });
+                    $("#airflow-amount").val($("#airflow-slider").slider("values", 0) +
+                        " - " + $("#airflow-slider").slider("values", 1));
+                });
+                $(function () {
+                    $("#power-slider").slider({
+                        range: true,
+                        min: 10,
+                        max: 65,
+                        values: [10, 65],
+                        slide: function (event, ui) {
+                            $("#power-amount").val(ui.values[0] + " - " + ui.values[1]);
+                        }
+                    });
+                    $("#power-amount").val($("#power-slider").slider("values", 0) +
+                        " - " + $("#power-slider").slider("values", 1))
+                });
+                $(function () {
+                    $("#sound-slider").slider({
+                        range: true,
+                        min: 20,
+                        max: 35,
+                        values: [20, 35],
+                        slide: function (event, ui) {
+                            $("#sound-amount").val(ui.values[0] + " - " + ui.values[1]);
+                        }
+                    });
+                    $("#sound-amount").val($("#sound-slider").slider("values", 0) +
+                        " - " + $("#sound-slider").slider("values", 1));
+                });
+                $(function () {
+                    $("#sweep-slider").slider({
+                        range: true,
+                        min: 18,
+                        max: 60,
+                        values: [18, 60],
+                        slide: function (event, ui) {
+                            $("#sweep-amount").val(ui.values[0] + " - " + ui.values[1]);
+                        }
+                    });
+                    $("#sweep-amount").val($("#sweep-slider").slider("values", 0) +
+                        " - " + $("#sweep-slider").slider("values", 1));
+                });
+            </script>
+        }
     </div>
 </div>
 

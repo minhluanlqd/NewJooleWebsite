@@ -1,0 +1,246 @@
+﻿@model IEnumerable<NewJooleWebsiteEntities.tblProduct>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        a.my-class {
+            color: #ff0000
+        }
+
+            a.my-class:active {
+                color: #0e86f8
+            }
+
+            a.my-class:link {
+                color: black
+            }
+
+            a.my-class:hover {
+                color: black
+            }
+
+            a.my-class:visited {
+                color: black
+            }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+
+        .column {
+            flex: 50%;
+            padding: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            font-size: 17px
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container-fluid" style="background-color:white">
+        <div class="row" id="header" style="background: linear-gradient(#16419e,white)">
+            <div class="row" style="width:99vw;height:70px;text-align:center;margin-top:20px;">
+                <img width="150" src="~/Images/Joole.png" style="float:left" />
+                <div style="display:inline;width:400px;margin-left:20px">
+                    <form action="doSearch">
+                        @Html.DropDownList("CategoryID", Session["CategoryName"] as SelectList, "Select Category", new { @class = "btn btn-secondary dropdown-toggle" })
+                        <input type="text" id="SubcategoryName" name="SubcategoryName" placeholder="Search..." class="btn btn-secondary dropdown-toggle" required />
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <h2>Product Summary</h2>
+    <div class="row">
+        <div class="column">
+            <P>DESCRIPTION</P>
+            <table>
+                <tr>
+                    <td>Manufacture</td>
+                    @foreach (var item in Model)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product_Name)
+
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td>Series</td>
+                    @foreach (var item in Model)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Series)
+
+                        </td>
+                    }
+
+                </tr>
+
+                <tr>
+                    <td>Model</td>
+                    @foreach (var item in Model)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Model)
+
+                        </td>
+                    }
+
+                </tr>
+
+            </table>
+            <h2> Type </h2>
+            <table>
+
+                <tr>
+                    <td>User Type</td>
+                    <td>Comemercial</td>
+
+                </tr>
+                <tr>
+                    <td>Application</td>
+                    <td>Indoor</td>
+
+                </tr>
+                <tr>
+                    <td>Mounting Location</td>
+                    <td>Roof</td>
+
+                </tr>
+                <tr>
+                    <td>Accessories</td>
+                    <td>With Light</td>
+
+                </tr>
+                <tr>
+                    <td>Model Year</td>
+                    @foreach (var item in Model)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Model_Year)
+
+                        </td>
+                    }
+
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="column">
+            <p>TECHNICAL SPECIFICATIONS</p>
+            <table>
+
+                <tr>
+                    <td>Airflow</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Power</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Operating voltage</td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Fan speed</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Number of fan speeds</td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Sound at max speed</td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Fan sweep diameter</td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Height</td>
+                    <td>1 meter</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>12</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function () {
+        $("#SubcategoryName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    data: {
+                        'CategoryID': $("#CategoryID").val(),
+                        'SubcategoryName': $("#SubcategoryName").val()
+                    },
+                    url: '@Url.Action("Autocomplete","Search")',
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        var parsed = JSON.parse(data);
+                        var newArray = [];
+                        var i = 0;
+                        $.each(parsed, function (key, val) {
+                            newArray[i] = val;
+                            i++;
+                        });
+                        response(newArray);
+                    },
+                    error: response
+                });
+            }
+        })
+    });
+    </script>
+</body>
+</html>

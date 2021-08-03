@@ -1,33 +1,42 @@
-﻿@model NewJooleWebsiteUI.Models.CateSubcate
-@{
+﻿@{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div style="margin-top:10%">
-
-    @using (@Html.BeginForm())
-    {
+    <form action="doSearch">
         <img style="width:30%" src="~/Images/Joole.png" />
         <h3>Building Product Selection Platform</h3>
-        @Html.DropDownListFor(m => m.CategoryID, ViewBag.CategoryName as SelectList, "Select Category", new { @class = "btn btn-secondary dropdown-toggle" })
-        //@Html.ValidationMessageFor(m => m.SubcategoryName)<br />
-        @Html.DropDownListFor(m => m.SubcategoryID, new SelectList(""), "Select Subcategory", new { @class = "btn btn-secondary dropdown-toggle" })
+        @Html.DropDownList("CategoryID", ViewBag.CategoryName as SelectList, "Select Category", new { @class = "btn btn-secondary dropdown-toggle" })
+        <input type="text" id="SubcategoryName" name="SubcategoryName" placeholder="Search..." class="btn btn-secondary dropdown-toggle" required/>
         <input type="submit" value="Search" class="btn btn-primary" />
-    }
+    </form>
     <script>
         $(document).ready(function () {
-            $("#CategoryID").change(function () {
-                $.ajax({
-                    type: "post",
-                    url: "/Search/GetSubcategoryList?Category=" + $(this).val(),
-                    contentType: "html",
-                    success: function (response) {
-                        $("#SubcategoryID").empty();
-                        $("#SubcategoryID").append(response);
-                    }
-                })
+            $("#SubcategoryName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        data: {
+                            'CategoryID': $("#CategoryID").val(),
+                            'SubcategoryName': $("#SubcategoryName").val()
+                        },
+                        url: '@Url.Action("Autocomplete","Search")',
+                        dataType: "json",
+                        contentType: "application/json;charset=utf-8",
+                        success: function (data) {
+                            var parsed = JSON.parse(data);
+                            var newArray = [];
+                            var i = 0;
+                            $.each(parsed, function (key, val) {
+                                newArray[i] = val;
+                                i++;
+                            });
+                            response(newArray);
+                        },
+                        error: response
+                    });
+                }
             })
-        })
+        });
     </script>
 </div>
