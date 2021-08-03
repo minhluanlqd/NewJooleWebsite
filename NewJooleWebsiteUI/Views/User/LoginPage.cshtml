@@ -1,14 +1,20 @@
 ﻿@model NewJooleWebsiteUI.Models.User
-@Styles.Render("~/CSS/Main.css");
+@Styles.Render("~/CSS/Main.css")
 @{
     ViewBag.Title = "Login";
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+<div>
+    @Html.ActionLink("Sign Up", "SignUpPopup", "User")
+</div>
 <img style="margin: 20px;width:30%" src="~/Images/Joole.png" />
 <h3>Building Product Selection Platform</h3>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval");
-}
+
 
 @using (Html.BeginForm("LoginPage", "User", FormMethod.Post))
 {
@@ -24,7 +30,7 @@
         </div>
         <div class="form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div class="form-input-container">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-input", placeholder = "Password"} })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-input", placeholder = "Password" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,4 +44,3 @@
         </div>
     </div>
 }
-

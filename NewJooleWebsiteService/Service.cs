@@ -41,14 +41,7 @@ namespace NewJooleWebsiteService
             return unitofWork.users.find(temp).ToList();
         }
 
-        public void addUser(string username, string password, string EmailAddress)
-        {
-            //var user = new List<T>
-            //{
-
-            //}
-
-        }
+        
 
         public bool Authentication(string username, string password)
         {
@@ -84,6 +77,8 @@ namespace NewJooleWebsiteService
                 return false;
             }
         }
+
+        
 
         public string getSessionID(string username, string password)
         {

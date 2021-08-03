@@ -16,6 +16,7 @@ namespace NewJooleWebsiteBLL
     {
         private DbContext context;
 
+        
         public UserRepo(DbContext context)
         {
             this.context = context;
@@ -43,6 +44,17 @@ namespace NewJooleWebsiteBLL
             return filteredRows;
 
         }
+
+
+        //creates a new, unique id for a new user
+        public string newID()
+        {
+            var x = dbSet.Count() + 1;
+            var id = "userX" + x;
+            return id;
+        }
+
+
 
         public tblUser find(int v)
         {

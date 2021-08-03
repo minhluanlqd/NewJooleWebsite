@@ -1,17 +1,111 @@
-﻿
+﻿@model NewJooleWebsiteUI.Models.User
+
 @{
-    Layout = null;
+    ViewBag.Title = "Login";
 }
 
-<!DOCTYPE html>
+<title>@ViewBag.Title</title>
+<div id='loginModal' class='modal' data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Register as User
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </h4>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>SignUpPopup</title>
-</head>
-<body>
-    <div> 
+                    
+                </div>
+                <hr />
+                <div>
+                    <label> Image Preview</label>
+                    <img />
+                    <p>Your Profile Pic</p>
+                    <div>
+                        <input type="button" id="selectProfile" value="Choose File" />
+                    </div>
+                </div>
+                <div>
+                    @using (Html.BeginForm("SignUpPopup", "User", FormMethod.Post))
+                    {
+                    <p>
+                        User Name:
+                        @Html.EditorFor(model => model.UserName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                    @class = "form-input",
+                                placeholder = "Username or email"
+                         }
+                        })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+
+                    </p>
+
+                    <p>
+                        Email Address:
+                        @Html.EditorFor(model => model.userEmail, new
+                        {
+                            htmlAttributes = new
+                            {
+                                    @class = "form-input",
+                                placeholder = "Email ID"
+                         }
+                        })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                    </p>
+
+                    <p>
+                        Password:
+                        @Html.EditorFor(model => model.Password, new
+                        {
+                            htmlAttributes = new
+                            {
+                                    @class = "form-input",
+                                placeholder = "Password"
+                         }
+                        })
+                        @Html.ValidationMessageFor(model => model.userEmail, "", new { @class = "text-danger" })
+                    </p>
+
+                    <p>
+                        Confirm Password:
+                        @Html.EditorFor(model => model.ConfirmPassword, new
+                        {
+                            htmlAttributes = new
+                            {
+                                    @class = "form-input",
+                                placeholder = "Password"
+                         }
+                        })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </p>
+                    <hr />
+                    <div>
+                        <input type="submit" name="signUpSubmit" value="Sign Up" />
+                    </div>
+                    }
+                </div>
+                <div style="color: black;">
+                    @Html.DisplayFor(model => model.userNameErrorMessage)
+                </div>
+                
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+    var signupBackURL = '/User/LoginPage';
+
+    </script>
+}
